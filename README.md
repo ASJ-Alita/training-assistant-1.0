@@ -2,7 +2,7 @@
 
 > 基于AI的培训行业问答助手，帮助培训从业者解决工作中的实际问题
 
-[在线演示](https://yourusername.github.io/training-assistant) · [功能特色](#-功能特色) · [使用场景](#-使用场景)
+[在线演示](https://ASJ-Alita.github.io/training-assistant) · [功能特色](#-功能特色) · [使用场景](#-使用场景)
 
 ---
 
@@ -84,7 +84,7 @@ AI会给你：
 ## 🚀 快速开始
 
 ### 方式一：在线演示
-直接打开 [在线演示](https://yourusername.github.io/training-assistant) 体验
+直接打开 [在线演示](https://ASJ-Alita.github.io/training-assistant) 体验
 
 ### 方式二：本地运行
 ```bash
