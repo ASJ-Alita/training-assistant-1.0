@@ -166,10 +166,16 @@
     </div>
     
     <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const chatArea = document.getElementById('chatArea');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
+        
+        // 确保元素存在
+        if (!chatArea || !userInput || !sendBtn) {
+            console.error('找不到必要的DOM元素');
+            return;
+        }
         
         let conversationContext = {
             currentModule: null,
@@ -540,7 +546,7 @@
         function getDefaultResponse() {
             return '您好！我是您的AI培训助手 🎓\n\n请直接输入您想了解的主题：\n\n📋 培训方案设计    📚 新员工培训\n👑 领导力培训      📊 效果评估\n🔍 需求分析        🎯 培训方法\n🎓 内训师培养      💬 跨部门沟通\n🤖 AI培训         🏢 企业管理\n\n💡 小技巧：\n• 可以直接问："第一天怎么做？"\n• 可以问："案例分析怎么实施？"\n• 输入"继续"获取更多选项';
         }
-    })();
+    });
     </script>
 </body>
 </html>
