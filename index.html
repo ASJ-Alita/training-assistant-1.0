@@ -177,12 +177,16 @@
     </div>
     
     <script>
-        const chatArea = document.getElementById('chatArea');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendBtn');
+        // 等待 DOM 完全加载
+        window.addEventListener('DOMContentLoaded', initApp);
         
-        // 对话上下文 - 记录当前对话主题
-        let conversationContext = {
+        function initApp() {
+            const chatArea = document.getElementById('chatArea');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendBtn');
+            
+            // 对话上下文 - 记录当前对话主题
+            let conversationContext = {
             currentModule: null,  // 当前模块
             moduleName: '',       // 模块名称
             history: []           // 历史记录 [{q, a, module}]
@@ -1187,9 +1191,7 @@
 • "培训方法" → "案例分析怎么操作"
 • "领导力" → "教练辅导怎么做"`;
         }
-        
-        // 聚焦输入框
-        userInput.focus();
+        } // 结束 initApp 函数
     </script>
 </body>
 </html>
