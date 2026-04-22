@@ -52,67 +52,21 @@
         
         .message.ai {
             background: white;
-            color: #334155;
+            color: #374151;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
         .message.ai .module-tag {
             display: inline-block;
-            background: #e0e7ff;
-            color: #6366f1;
-            padding: 0.2rem 0.6rem;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             margin-bottom: 0.5rem;
             font-weight: 500;
-        }
-        
-        .input-area {
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            gap: 0.75rem;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .input-area input {
-            flex: 1;
-            padding: 0.875rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        
-        .input-area input:focus {
-            border-color: #6366f1;
-        }
-        
-        .input-area button {
-            padding: 0.875rem 1.5rem;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .input-area button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-        }
-        
-        .input-area button:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
         
         .typing {
@@ -124,95 +78,168 @@
         .typing span {
             width: 8px;
             height: 8px;
-            background: #94a3b8;
+            background: #6366f1;
             border-radius: 50%;
-            animation: bounce 1.4s infinite;
+            animation: bounce 1.4s infinite ease-in-out;
         }
         
-        .typing span:nth-child(2) { animation-delay: 0.2s; }
-        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        .typing span:nth-child(1) { animation-delay: -0.32s; }
+        .typing span:nth-child(2) { animation-delay: -0.16s; }
         
         @keyframes bounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .input-area input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .input-area input:focus {
+            border-color: #6366f1;
+        }
+        
+        .input-area button {
+            padding: 0.75rem 1.5rem;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .input-area button:hover:not(:disabled) {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+        
+        .input-area button:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: #f3f4f6;
+        }
+        
+        .quick-questions button {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #6366f1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quick-questions button:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🎓 AI培训问答助手</h1>
-        <p>支持追问与多轮对话</p>
+        <h1>🎓 AI培训助手</h1>
+        <p>您的智能培训知识库 - 支持追问</p>
     </div>
     
-    <div class="chat-area" id="chatArea">
-        <div class="message ai">
-            您好！我是您的AI培训助手 🎓
-
-我可以帮您解答以下问题：
-
-📋 培训方案设计    📚 新员工培训
-👑 领导力培训      📊 效果评估
-🔍 需求分析        🎯 培训方法
-🎓 内训师培养      💬 跨部门沟通
-🤖 AI培训         🏢 企业管理
-
-请直接输入您想了解的内容，支持追问！
-        </div>
+    <div class="quick-questions">
+        <button onclick="askQuestion('新员工培训')">📚 新员工培训</button>
+        <button onclick="askQuestion('领导力培训')">👑 领导力</button>
+        <button onclick="askQuestion('培训效果评估')">📊 效果评估</button>
+        <button onclick="askQuestion('培训方案设计')">📋 方案设计</button>
+        <button onclick="askQuestion('内训师')">🎓 内训师</button>
     </div>
+    
+    <div class="chat-area" id="chatArea"></div>
     
     <div class="input-area">
-        <input type="text" id="userInput" placeholder="输入您的培训问题...">
-        <button id="sendBtn" disabled>发送</button>
+        <input type="text" id="userInput" placeholder="输入您的培训问题..." autocomplete="off">
+        <button id="sendBtn">发送</button>
     </div>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const chatArea = document.getElementById('chatArea');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendBtn');
+        // 获取元素
+        var chatArea = document.getElementById('chatArea');
+        var userInput = document.getElementById('userInput');
+        var sendBtn = document.getElementById('sendBtn');
         
-        // 确保元素存在
-        if (!chatArea || !userInput || !sendBtn) {
-            console.error('找不到必要的DOM元素');
-            return;
-        }
-        
-        let conversationContext = {
+        // 对话上下文
+        var conversationContext = {
             currentModule: null,
             moduleName: '',
             history: []
         };
         
-        userInput.addEventListener('input', function() {
-            sendBtn.disabled = !userInput.value.trim();
-        });
+        // 初始化时启用按钮并聚焦
+        sendBtn.disabled = false;
+        userInput.focus();
         
-        sendBtn.addEventListener('click', sendMessage);
+        // 输入事件 - 实时控制按钮状态
+        userInput.oninput = function() {
+            sendBtn.disabled = (userInput.value.trim() === '');
+        };
         
-        userInput.addEventListener('keydown', function(e) {
+        // 发送按钮点击
+        sendBtn.onclick = function() {
+            sendMessage();
+        };
+        
+        // 回车发送
+        userInput.onkeydown = function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
-        });
+        };
         
-        userInput.focus();
+        // 快捷问题
+        function askQuestion(q) {
+            userInput.value = q;
+            sendBtn.disabled = false;
+            sendMessage();
+        }
         
+        // 发送消息
         function sendMessage() {
-            const text = userInput.value.trim();
+            var text = userInput.value.trim();
             if (!text) return;
             
-            const isFollowUp = isFollowUpQuestion(text) && conversationContext.currentModule !== null;
+            var isFollowUp = isFollowUpQuestion(text) && conversationContext.currentModule !== null;
             
             addMessage(text, 'user');
             userInput.value = '';
             sendBtn.disabled = true;
             
-            const typing = showTyping();
+            var typing = showTyping();
             
             setTimeout(function() {
                 typing.remove();
-                const response = getAIResponse(text, isFollowUp);
+                var response = getAIResponse(text, isFollowUp);
                 addMessage(response, 'ai', conversationContext.currentModule);
                 
                 conversationContext.history.push({
@@ -223,8 +250,9 @@
             }, 800);
         }
         
+        // 添加消息
         function addMessage(text, type, module) {
-            const div = document.createElement('div');
+            var div = document.createElement('div');
             div.className = 'message ' + type;
             
             if (type === 'ai' && module) {
@@ -237,14 +265,16 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
         
+        // HTML转义
         function escapeHtml(text) {
-            const div = document.createElement('div');
+            var div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
         
+        // 显示打字动画
         function showTyping() {
-            const div = document.createElement('div');
+            var div = document.createElement('div');
             div.className = 'message ai';
             div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
             chatArea.appendChild(div);
@@ -252,8 +282,9 @@
             return div;
         }
         
+        // 判断是否追问
         function isFollowUpQuestion(text) {
-            const t = text.trim();
+            var t = text.trim();
             if (/^(具体|继续|还有|然后|接下来|详细|怎么|如何|怎样|能不能|能说|可以|给|帮|我要|我想)/.test(t)) {
                 return true;
             }
@@ -263,15 +294,16 @@
             return false;
         }
         
+        // 获取AI回复
         function getAIResponse(question, isFollowUp) {
-            const q = question.toLowerCase().trim();
+            var q = question.toLowerCase().trim();
             
             if (isFollowUp && conversationContext.currentModule) {
-                const followUpResponse = getFollowUpResponse(q, conversationContext.currentModule, question);
+                var followUpResponse = getFollowUpResponse(q, conversationContext.currentModule, question);
                 if (followUpResponse) return followUpResponse;
             }
             
-            const matchedModule = matchKnowledgeBase(q);
+            var matchedModule = matchKnowledgeBase(q);
             if (matchedModule) {
                 conversationContext.currentModule = matchedModule.module;
                 conversationContext.moduleName = matchedModule.name;
@@ -282,9 +314,9 @@
             return getDefaultResponse();
         }
         
-        // ========== 追问响应 ==========
+        // 追问响应
         function getFollowUpResponse(question, module, originalQuestion) {
-            const q = question.trim();
+            var q = question.trim();
             
             // ========== 新员工培训 ==========
             if (module === '新员工培训') {
@@ -358,16 +390,20 @@
                     return '👀 L3行为层 - 行为改变评估\n\n━━━━━━━━━━━━━━━━━━━━\n\n💡 评估时机：\n培训结束后1-3个月\n（给学员足够时间应用和巩固）\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 评估方法一：行为观察法\n\n【观察维度】\n1. 知识应用 - 是否使用培训所学\n2. 技能表现 - 操作是否规范正确\n3. 态度改变 - 工作积极性是否提升\n4. 行为习惯 - 是否形成新的工作方式\n\n【记录方法】\n• 关键事件法：记录做得好/不好的具体事例\n• 频率统计法：统计行为发生的次数\n• 等级评定法：用等级评估行为表现\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 评估方法二：360度反馈\n\n【反馈来源权重】\n• 直接上司：30%（最了解工作表现）\n• 同事/协作部门：30%（协作视角）\n• 下属（如有）：20%（管理类培训）\n• 客户（如有）：20%（服务类培训）\n\n【问卷示例】\n请对学员在以下方面的表现评分：\n1. 培训内容在实际工作中的应用程度\n2. 工作效率和质量的变化\n3. 与团队协作的效果\n4. 主动学习和分享的程度\n□明显提升 □有所提升 □无变化 □有所退步\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 评估方法三：绩效对比\n\n【对比指标】\n• 培训前3个月 vs 培训后3个月\n• 工作完成率\n• 错误/投诉率\n• 客户满意度\n• 同事/上司评分\n\n━━━━━━━━━━━━━━━━━━━━\n\n💡 实施建议：\n1. 培训前先设定行为指标\n2. 明确告知学员和上司观察期\n3. 定期（每月）与学员沟通反馈\n4. 收集具体事例而非主观判断\n5. 对比要客观，承认外部因素影响\n\n⚠️ 常见问题：\nQ: 学员不配合怎么办？\nA: 强调是为帮助成长，不是考核\n\nQ: 外部因素影响大？\nA: 用多个指标综合评估，不单一依赖';
                 }
                 
-                if (/继续|还有|然后/.test(q)) {
-                    return '培训效果评估深入话题：\n\n📌 请选择：\n\n1️⃣ L1问卷设计\n   "满意度问卷怎么写？"\n\n2️⃣ L2考核设计\n   "学习考核怎么出题？"\n\n3️⃣ L3行为观察\n   "怎么观察行为改变？"\n\n4️⃣ L4结果评估\n   "业务指标怎么选？ROI怎么算？"\n\n5️⃣ 评估报告\n   "评估报告怎么写？"\n\n请直接说出您想了解的话题！';
-                }
-                
                 if (/L4|业务|结果|ROI|投资回报|结果层/.test(q)) {
                     return '📈 L4结果层 - 业务成果评估\n\n━━━━━━━━━━━━━━━━━━━━\n\n💡 评估时机：\n培训结束后6-12个月\n（给业务指标足够时间体现变化）\n\n━━━━━━━━━━━━━━━━━━━━\n\n🎯 核心问题：\n"培训到底带来了什么业务价值？"\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 常用业务指标：\n\n【销售类培训】\n• 销售额增长率（%）\n• 客户转化率（%）\n• 客单价提升（元）\n• 客户满意度（NPS）\n\n【客服类培训】\n• 客户满意度（%）\n• 投诉率变化（%）\n• 问题解决时长（分钟）\n• 首次解决率（%）\n\n【管理类培训】\n• 团队离职率（%）\n• 员工满意度（%）\n• 目标完成率（%）\n• 内部晋升率（%）\n\n【安全类培训】\n• 安全事故数量（起）\n• 安全检查合格率（%）\n• 安全隐患整改率（%）\n\n━━━━━━━━━━━━━━━━━━━━\n\n📊 计算培训ROI：\n\n公式：\nROI = (培训效益 - 培训成本) ÷ 培训成本 × 100%\n\n其中：\n• 培训效益 = 业绩提升 - 相关成本\n• 培训成本 = 讲师费 + 场地费 + 教材费 + 员工时间成本\n\n示例：\n• 培训销售技能，投入5万元\n• 培训后3个月，销售额提升50万\n• ROI = (50万 - 5万) ÷ 5万 × 100% = 900%\n\n━━━━━━━━━━━━━━━━━━━━\n\n💡 实施建议：\n1. 培训前设定明确的业务目标\n2. 收集培训前的基线数据\n3. 排除其他干扰因素\n4. 定期跟踪（月/季/年）\n5. 区分直接和间接贡献\n\n⚠️ 注意事项：\n• 业务成果受多因素影响\n• 培训贡献难以完全剥离\n• 关注可归因的部分\n• 定性+定量结合评估';
                 }
                 
                 if (/报告|总结|复盘/.test(q)) {
                     return '📝 培训效果评估报告模板\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 报告结构：\n\n1️⃣ 执行摘要\n   一页纸总结：培训目的、投入、主要成果、ROI\n\n2️⃣ 培训概况\n   • 培训名称/主题\n   • 培训时间/地点\n   • 学员人数/来源\n   • 培训方式/时长\n   • 投入成本明细\n\n3️⃣ 评估数据\n\n【L1满意度数据】\n• 问卷回收率：___\n• 总体满意度：___\n• 分项满意度：___\n• 学员评价摘要\n\n【L2学习数据】\n• 考核参加率：___\n• 平均成绩：___\n• 及格率：___\n• 优秀率：___\n\n【L3行为数据】\n• 观察周期：___\n• 行为改变率：___\n• 上级评价：___\n• 同事反馈：___\n\n【L4业务数据】\n• 业务指标变化：___\n• ROI计算：___\n• 成本效益分析：___\n\n4️⃣ 结论与建议\n   • 培训是否达到预期目标\n   • 主要成功因素\n   • 主要改进点\n   • 下一步行动建议\n\n━━━━━━━━━━━━━━━━━━━━\n\n💡 报告撰写要点：\n1. 数据说话，避免主观描述\n2. 对比分析（培训前vs后）\n3. 图表可视化\n4. 客观呈现局限性\n5. 提出可落地的建议\n\n📌 推荐格式：\nWord报告 + Excel数据 + PPT汇报';
+                }
+                
+                if (/继续|还有|然后/.test(q)) {
+                    return '培训效果评估深入话题：\n\n📌 请选择：\n\n1️⃣ L1问卷设计\n   "满意度问卷怎么写？"\n\n2️⃣ L2考核设计\n   "学习考核怎么出题？"\n\n3️⃣ L3行为观察\n   "怎么观察行为改变？"\n\n4️⃣ L4结果评估\n   "业务指标怎么选？ROI怎么算？"\n\n5️⃣ 评估报告\n   "评估报告怎么写？"\n\n请直接说出您想了解的话题！';
+                }
+            }
+            
+            // ========== 培训方案设计 ==========
             if (module === '培训方案设计') {
                 if (/ADDIE|分析|设计|开发|实施|评估/.test(q)) {
                     return '🔄 ADDIE模型详解\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 A - Analysis 分析阶段\n\n• 培训需求分析\n  - 组织分析：公司目标与现状差距\n  - 任务分析：岗位需要什么能力\n  - 人员分析：谁需要培训什么\n\n• 受众分析\n  - 学员人数和背景\n  - 学习风格和偏好\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 D - Design 设计阶段\n\n• 确定目标\n  - 使用SMART原则\n\n• 设计大纲\n  - 课程结构\n  - 知识点清单\n\n• 选择方法\n  - 讲授/案例/演练...\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 D - Development 开发阶段\n\n• 制作课件 - PPT/手册/视频\n• 开发材料 - 练习题/工具表单\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 I - Implementation 实施阶段\n\n• 课前准备 - 场地/设备/材料\n• 培训交付 - 按计划执行\n\n━━━━━━━━━━━━━━━━━━━━\n\n📋 E - Evaluation 评估阶段\n\n• 即时评估 - 满意度问卷\n• 学习评估 - 考核测试\n• 行为评估 - 观察反馈\n• 结果评估 - 业务指标';
@@ -465,9 +501,9 @@
             return '好的！请具体告诉我您想了解什么？\n\n💡 可以这样问：\n\n• "怎么做" → 获取方法步骤\n  例："案例分析怎么做？"\n\n• "是什么" → 获取概念解释\n  例："ADDIE是什么？"\n\n• "模板" → 获取模板工具\n  例："培训计划模板"\n\n• "技巧" → 获取经验秘诀\n  例："有什么技巧？"\n\n• "话术" → 获取沟通话术\n  例："开场话术"\n\n请直接说出您想了解的！';
         }
         
-        // 知识库
+        // 知识库匹配
         function matchKnowledgeBase(q) {
-            const knowledge = [
+            var knowledge = [
                 {
                     keywords: ['新员工', '入职培训', '第一天', '新人'],
                     module: '新员工培训',
@@ -529,24 +565,24 @@
                     response: '🏢 企业管理培训专题\n\n━━━━━━━━━━━━━━━━━━━━\n\n📚 管理模块\n• 目标管理 - OKR/KPI\n• 时间管理 - 优先级、会议\n• 绩效管理 - 面谈、反馈\n• 团队管理 - 激励、建设\n\n🎯 中层重点\n• 承上启下\n• 跨部门协作\n• 问题解决\n• 变革推动'
                 },
             ];
-            
-            for (let i = 0; i < knowledge.length; i++) {
-                const item = knowledge[i];
-                for (let j = 0; j < item.keywords.length; j++) {
-                    const keyword = item.keywords[j];
+
+            for (var i = 0; i < knowledge.length; i++) {
+                var item = knowledge[i];
+                for (var j = 0; j < item.keywords.length; j++) {
+                    var keyword = item.keywords[j];
                     if (q.indexOf(keyword) !== -1 || keyword.indexOf(q) !== -1) {
                         return item;
                     }
                 }
             }
-            
+
             return null;
         }
         
+        // 默认回复
         function getDefaultResponse() {
             return '您好！我是您的AI培训助手 🎓\n\n请直接输入您想了解的主题：\n\n📋 培训方案设计    📚 新员工培训\n👑 领导力培训      📊 效果评估\n🔍 需求分析        🎯 培训方法\n🎓 内训师培养      💬 跨部门沟通\n🤖 AI培训         🏢 企业管理\n\n💡 小技巧：\n• 可以直接问："第一天怎么做？"\n• 可以问："案例分析怎么实施？"\n• 输入"继续"获取更多选项';
         }
-    });
     </script>
 </body>
 </html>
